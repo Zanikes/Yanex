@@ -1,0 +1,1911 @@
+if game.CoreGui:FindFirstChild("Yanex") then
+	game.CoreGui:FindFirstChild("Yanex"):Destroy()
+end
+
+if game.CoreGui:FindFirstChild("Yanex loader") then
+	game.CoreGui:FindFirstChild("Yanex loader"):Destroy()
+end
+
+function tpcarsecured(Vehicle)
+	local Position = game.Players.LocalPlayer.Character.Head.CFrame
+	local Tp = true
+	while Tp do
+		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+			Tp = false
+		end
+		for i, S in pairs(game.Workspace.Vehicles:FindFirstChild(Vehicle):GetDescendants())do
+			if S.ClassName == "Part" or S.ClassName == "Union"then
+				S.Anchored = false
+				S.Velocity = Vector3.new(0.0001,0.0001,0.1)
+			end
+		end
+		if Tp then
+			local Math = math.random(0,200)*0.001
+			game.Workspace.Vehicles:FindFirstChild(Vehicle):SetPrimaryPartCFrame(Position*CFrame.new(0,0.2+Math,15))
+		end
+		wait()
+	end
+end
+
+local function spawnItem(itemName)
+	_G.fireserver(ChangeParent, game.Lighting.LootDrops[itemName], game.Lighting.Materials)
+	wait()
+	_G.fireserver(PlaceMaterial, game.Lighting.Materials[itemName], game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-3,3),0,math.random(-3,3)), false, false)
+	wait()
+	_G.fireserver(ChangeParent, game.Lighting.Materials.FAL, game.Lighting.LootDrops)
+end
+
+local function Message_Client(text, Color)
+    game.Players.LocalPlayer.PlayerGui.MessageSystem.NewMessage.Color.Value = Color
+    game.Players.LocalPlayer.PlayerGui.MessageSystem.NewMessage.Value = text
+end
+
+if not game.Lighting.Materials:FindFirstChild("VS50Placed") then
+	game.ReplicatedStorage:FindFirstChild("VS50Placed").Parent = game.Lighting.Materials
+	Message_Client("Moved VS50Placed to game.Lighting.Materials", "Green")
+end
+
+if not game.Lighting.Materials:FindFirstChild("C4Placed") then
+	game.ReplicatedStorage:FindFirstChild("C4Placed").Parent = game.Lighting.Materials
+	Message_Client("Moved C4Placed to game.Lighting.Materials", "Green")
+end
+
+if not game.Lighting.Materials:FindFirstChild("TM46Placed") then
+	game.ReplicatedStorage:FindFirstChild("TM46Placed").Parent = game.Lighting.Materials
+	Message_Client("Moved TM46Placed to game.Lighting.Materials", "Green")
+end
+
+local Yanexloader = Instance.new("ScreenGui")
+local mainframe = Instance.new("Frame")
+local topbar = Instance.new("Frame")
+local decor = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local loading = Instance.new("Frame")
+local loadbackground = Instance.new("Frame")
+local loadbar = Instance.new("Frame")
+local text = Instance.new("TextLabel")
+local UIListLayout = Instance.new("UIListLayout")
+
+Yanexloader.Name = "Yanex loader"
+Yanexloader.Parent = game.CoreGui
+Yanexloader.ResetOnSpawn = false
+Yanexloader.DisplayOrder = 50
+
+mainframe.Name = "mainframe"
+mainframe.Parent = Yanexloader
+mainframe.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainframe.BorderSizePixel = 0
+mainframe.Position = UDim2.new(0.378325492, 0, 0.540756941, 0)
+mainframe.Size = UDim2.new(0, 325, 0, 100)
+
+topbar.Name = "topbar"
+topbar.Parent = mainframe
+topbar.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+topbar.BorderSizePixel = 0
+topbar.Size = UDim2.new(0, 327, 0, 22)
+topbar.ZIndex = 2
+
+decor.Name = "decor"
+decor.Parent = topbar
+decor.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+decor.BorderSizePixel = 0
+decor.Size = UDim2.new(1, 0, 1, 2)
+
+title.Name = "title"
+title.Parent = topbar
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Size = UDim2.new(0, 327, 0, 22)
+title.ZIndex = 2
+title.Font = Enum.Font.Fantasy
+title.Text = "Yanex"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.TextSize = 14.000
+title.TextWrapped = true
+
+loading.Name = "loading"
+loading.Parent = mainframe
+loading.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+loading.BackgroundTransparency = 1.000
+loading.BorderSizePixel = 0
+loading.Position = UDim2.new(0, 0, 0.236499935, 0)
+loading.Size = UDim2.new(0, 327, 0, 76)
+
+loadbackground.Name = "loadbackground"
+loadbackground.Parent = loading
+loadbackground.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+loadbackground.BorderColor3 = Color3.fromRGB(255, 75, 75)
+loadbackground.BorderSizePixel = 2
+loadbackground.Position = UDim2.new(0.137614682, 0, 0.355263144, 0)
+loadbackground.Size = UDim2.new(0, 237, 0, 40)
+
+loadbar.Name = "loadbar"
+loadbar.Parent = loadbackground
+loadbar.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+loadbar.BorderSizePixel = 0
+loadbar.Size = UDim2.new(0, 0, 0, 40)
+
+text.Name = "text"
+text.Parent = loading
+text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+text.BackgroundTransparency = 2.000
+text.Position = UDim2.new(0.192660555, 0, 0.092105262, 0)
+text.Size = UDim2.new(0, 200, 0, 20)
+text.Font = Enum.Font.Fantasy
+text.Text = ""
+text.TextColor3 = Color3.fromRGB(255, 75, 75)
+text.TextSize = 14.000
+text.TextWrapped = true
+
+UIListLayout.Parent = Yanexloader
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+wait(1)
+loadbar:TweenSize(UDim2.new(0,55,0,40), 'Out', 'Quad', 0.25)
+wait(0.25)
+text.Text = "Loading Gui objects..."
+wait(1.5)
+loadbar:TweenSize(UDim2.new(0,100,0,40), 'Out', 'Quad', 0.25)
+wait(0.25)
+text.Text = "Loading Gui properties..."
+wait(2)
+loadbar:TweenSize(UDim2.new(0,160,0,40), 'Out', 'Quad', 0.25)
+wait(0.25)
+text.Text = "Loading Functions..."
+wait(4)
+loadbar:TweenSize(UDim2.new(1,0,0,40), 'Out', 'Quad', 0.25)
+wait(0.25)
+text.Text = "Loading complete, Enjoy!"
+wait(1)
+topbar:Destroy()
+decor:Destroy()
+title:Destroy()
+loading:Destroy()
+loadbackground:Destroy()
+loadbar:Destroy()
+text:Destroy()
+mainframe:TweenSize(UDim2.new(0,500,0,300), 'Out', 'Linear', 1)
+wait(1)
+Yanexloader:Destroy()
+
+local ms = game.Players.LocalPlayer:GetMouse()
+
+local Yanex = Instance.new("ScreenGui")
+local drag = Instance.new("Frame")
+local decor = Instance.new("Frame")
+local cmdframe = Instance.new("Frame")
+local arrow = Instance.new("TextLabel")
+local commandoutput = Instance.new("ScrollingFrame")
+local console = Instance.new("TextLabel")
+local msg = Instance.new("TextLabel")
+local msg_2 = Instance.new("TextLabel")
+local console_2 = Instance.new("TextLabel")
+local cmdbox = Instance.new("TextBox")
+local decor2 = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local consoleb = Instance.new("TextButton")
+local consolelabel = Instance.new("TextLabel")
+local mainb = Instance.new("TextButton")
+local mainlabel = Instance.new("TextLabel")
+local decorside = Instance.new("Frame")
+local Sample = Instance.new("ImageLabel")
+local mainframe = Instance.new("Frame")
+local main = Instance.new("Frame")
+local maintitle = Instance.new("TextLabel")
+local esp = Instance.new("TextButton")
+local infstamina = Instance.new("TextButton")
+local esplabel = Instance.new("TextLabel")
+local staminalabel = Instance.new("TextLabel")
+local particals = Instance.new("Frame")
+local partiacalstitle = Instance.new("TextLabel")
+local fire = Instance.new("TextButton")
+local sparkles = Instance.new("TextButton")
+local firelabel = Instance.new("TextLabel")
+local sparkleslabel = Instance.new("TextLabel")
+local smoke = Instance.new("TextButton")
+local smokelabel = Instance.new("TextLabel")
+local spawning = Instance.new("Frame")
+local itemplayer = Instance.new("TextBox")
+local spawningtitle = Instance.new("TextLabel")
+local item = Instance.new("TextBox")
+local amount = Instance.new("TextBox")
+local spawn = Instance.new("TextButton")
+local players = Instance.new("Frame")
+local playertitle = Instance.new("TextLabel")
+local playerr = Instance.new("TextBox")
+local pull = Instance.new("TextButton")
+local pulllabel = Instance.new("TextLabel")
+local vehicles = Instance.new("Frame")
+local vehicletitle = Instance.new("TextLabel")
+local vehicle = Instance.new("TextBox")
+local speed = Instance.new("TextBox")
+local bring = Instance.new("TextButton")
+local setspeed = Instance.new("TextButton")
+local credits = Instance.new("Frame")
+local creditstitle = Instance.new("TextLabel")
+local madeby = Instance.new("TextLabel")
+local name = Instance.new("TextLabel")
+local note = Instance.new("Frame")
+local text = Instance.new("TextLabel")
+
+Yanex.Name = "Yanex"
+Yanex.Parent = game.CoreGui
+Yanex.ResetOnSpawn = false
+Yanex.DisplayOrder = 50
+
+local Buttons = 2
+		
+local posc = UDim2.new(0,0,0,30)
+local function cconsole()
+	local c = Instance.new('TextLabel')
+	c.Name = 'console'
+	c.Parent = commandoutput
+	c.Position = posc
+	c.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	c.BackgroundTransparency = 2.000
+	c.Size = UDim2.new(0, 65, 0, 15)
+	c.Font = Enum.Font.Gotham
+	c.Text = "{Console}"
+	c.TextColor3 = Color3.fromRGB(255,75,75)
+	c.TextSize = 12.000
+	c.TextWrapped = true
+	posc = posc + UDim2.new(0,0,0,15)
+	if c.Position.Y.Offset+c.Size.Y.Offset > commandoutput.AbsoluteSize.Y then
+	commandoutput.CanvasSize = UDim2.new(0,0,0,Buttons*c.Size.Y.Offset+c.Size.Y.Offset)
+	else
+	commandoutput.CanvasSize = UDim2.new(0,0,0,0)
+	end
+	Buttons = Buttons + 1
+end
+
+local posm = UDim2.new(0,64,0,30)
+local posextram = UDim2.new(0,5,0,30)
+local function cmsg(text)
+	local m = Instance.new('TextLabel')
+	m.Name = 'msg'
+	m.Parent = commandoutput
+	m.Position = posm
+	m.BackgroundTransparency = 1
+	m.Size = UDim2.new(1,-65,0,15)
+	m.Font = Enum.Font.Gotham
+	m.Text = text
+	m.TextColor3 = Color3.new(1,1,1)
+	m.TextScaled = false
+	m.TextSize = 12
+	m.TextXAlignment = Enum.TextXAlignment.Left
+	posm = posm + UDim2.new(0,0,0,15)
+	posextram = posextram + UDim2.new(0,0,0,15)
+end
+
+
+local function extramsg(text)
+	local m = Instance.new('TextLabel')
+	m.Name = 'msg'
+	m.Parent = commandoutput
+	m.Position = posextram
+	m.BackgroundTransparency = 1
+	m.Size = UDim2.new(1,0,0,15)
+	m.Font = Enum.Font.Gotham
+	m.Text = text
+	m.TextColor3 = Color3.new(1,1,1)
+	m.TextScaled = false
+	m.TextSize = 12
+	m.TextXAlignment = Enum.TextXAlignment.Left
+	posextram = posextram + UDim2.new(0,0,0,15)
+	if m.Position.Y.Offset+m.Size.Y.Offset > commandoutput.AbsoluteSize.Y then
+		commandoutput.CanvasSize = UDim2.new(0,0,0,Buttons*m.Size.Y.Offset+m.Size.Y.Offset)
+	else
+		commandoutput.CanvasSize = UDim2.new(0,0,0,0)
+	end
+	Buttons = Buttons + 1
+	posc = posc + UDim2.new(0,0,0,15)
+	posm = posm + UDim2.new(0,0,0,15)
+end
+
+drag.Name = "drag"
+drag.Parent = Yanex
+drag.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+drag.BorderSizePixel = 0
+drag.Position = UDim2.new(0.5, -250, 0.5, -150)
+drag.Size = UDim2.new(0, 500, 0, 22)
+drag.ZIndex = 6
+local UserInputService = game:GetService("UserInputService")
+
+
+local gui = drag
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+	local delta = input.Position - dragStart
+	wait(0.01)
+	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+gui.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = gui.Position
+		
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+gui.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+decor.Name = "decor"
+decor.Parent = drag
+decor.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+decor.BorderSizePixel = 0
+decor.Size = UDim2.new(1, 0, 1, 2)
+decor.ZIndex = 5
+
+cmdframe.Name = "cmdframe"
+cmdframe.Parent = drag
+cmdframe.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+cmdframe.BorderSizePixel = 0
+cmdframe.Size = UDim2.new(0, 500, 0, 300)
+
+arrow.Name = "arrow"
+arrow.Parent = cmdframe
+arrow.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+arrow.BorderSizePixel = 0
+arrow.Position = UDim2.new(0, 41, 1, -20)
+arrow.Size = UDim2.new(0, 20, 0, 20)
+arrow.Font = Enum.Font.Gotham
+arrow.Text = ">"
+arrow.TextColor3 = Color3.fromRGB(255, 255, 255)
+arrow.TextSize = 14.000
+
+commandoutput.Name = "commandoutput"
+commandoutput.Parent = cmdframe
+commandoutput.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+commandoutput.BorderSizePixel = 0
+commandoutput.Position = UDim2.new(0.0799999982, 0, 0.0769999996, 0)
+commandoutput.Size = UDim2.new(0, 460, 0, 256)
+commandoutput.BottomImage = ""
+commandoutput.CanvasSize = UDim2.new(0, 0, 0, 0)
+commandoutput.ScrollBarThickness = 4
+commandoutput.TopImage = ""
+
+console.Name = "console"
+console.Parent = commandoutput
+console.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+console.BackgroundTransparency = 2.000
+console.Size = UDim2.new(0, 65, 0, 15)
+console.Font = Enum.Font.Gotham
+console.Text = "{Console}"
+console.TextColor3 = Color3.fromRGB(255, 75, 75)
+console.TextSize = 12.000
+console.TextWrapped = true
+
+msg.Name = "msg"
+msg.Parent = commandoutput
+msg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+msg.BackgroundTransparency = 2.000
+msg.Position = UDim2.new(0, 64, 0, 0)
+msg.Size = UDim2.new(1, -65, 0, 15)
+msg.Font = Enum.Font.Gotham
+msg.Text = "Yanex Successfully Loaded"
+msg.TextColor3 = Color3.fromRGB(255, 255, 255)
+msg.TextSize = 12.000
+msg.TextXAlignment = Enum.TextXAlignment.Left
+
+msg_2.Name = "msg"
+msg_2.Parent = commandoutput
+msg_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+msg_2.BackgroundTransparency = 2.000
+msg_2.Position = UDim2.new(0, 64, 0, 15)
+msg_2.Size = UDim2.new(1, -65, 0, 15)
+msg_2.Font = Enum.Font.Gotham
+msg_2.Text = "Type !cmds to see commands"
+msg_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+msg_2.TextSize = 12.000
+msg_2.TextXAlignment = Enum.TextXAlignment.Left
+
+console_2.Name = "console"
+console_2.Parent = commandoutput
+console_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+console_2.BackgroundTransparency = 2.000
+console_2.Position = UDim2.new(0, 0, 0, 15)
+console_2.Size = UDim2.new(0, 65, 0, 15)
+console_2.Font = Enum.Font.Gotham
+console_2.Text = "{Console}"
+console_2.TextColor3 = Color3.fromRGB(255, 75, 75)
+console_2.TextSize = 12.000
+console_2.TextWrapped = true
+
+cmdbox.Name = "cmdbox"
+cmdbox.Parent = cmdframe
+cmdbox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+cmdbox.BorderSizePixel = 0
+cmdbox.Position = UDim2.new(0, 61, 1, -20)
+cmdbox.Size = UDim2.new(0, 439, 0, 20)
+cmdbox.Font = Enum.Font.Gotham
+cmdbox.PlaceholderText = "Type a command here..."
+cmdbox.Text = ""
+cmdbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+cmdbox.TextScaled = true
+cmdbox.TextSize = 14.000
+cmdbox.TextWrapped = true
+cmdbox.TextXAlignment = Enum.TextXAlignment.Left
+
+local noclipping = false
+local player = game.Players.LocalPlayer
+		
+		local function executeEsp()
+			for get,nplayer in ipairs(game.Players:GetPlayers()) do
+				if nplayer.Name == player.Name then
+					
+				else
+					local BGUI = Instance.new('BillboardGui', workspace.CurrentCamera)
+					BGUI.Name = 'EspBillboard'
+					local BGUIFrame = Instance.new('Frame', BGUI)
+					BGUIFrame.Name = 'EspBillboardFrame'
+					local BGUIName = Instance.new('TextLabel', BGUIFrame)
+					BGUIName.Name = 'EspName'
+					BGUI.AlwaysOnTop = true
+					BGUI.Enabled = true
+					BGUI.Size = UDim2.new(0,60,0,15)
+					BGUI.Adornee = nplayer.Character.Head
+					BGUI.MaxDistance = math.huge
+					BGUIFrame.BackgroundTransparency = 1
+					BGUIFrame.Size = UDim2.new(1,0,1,0)
+					BGUIName.Size = UDim2.new(2,0,1,0)
+					BGUIName.Text = nplayer.Name
+					BGUIName.TextColor3 = Color3.fromRGB(255, 75,75)
+					BGUIName.TextStrokeColor3 = Color3.new(0, 0, 0)
+					BGUIName.TextStrokeTransparency = 0
+					BGUIName.Font = Enum.Font.Legacy
+					BGUIName.TextSize = 10
+					BGUIName.TextWrapped = true
+					BGUIName.BackgroundTransparency = 1
+				end
+			end
+		end
+		
+		local function tooManyArgs()
+			cconsole()
+			cmsg("Too many Args!")
+		end
+		
+		local function invalidArgs()
+			cconsole()
+			cmsg("Invalid Args!")
+		end
+		
+		local commands = {}
+		
+		local prefix = "!"
+		
+		commands.cmds = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				cconsole()
+				cmsg(prefix .. "cmds")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "clear - clears the console")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "prefix [Symbol]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "nofog")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "tpbodies")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "tpcrates")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "jp [Value]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "setammo [Value]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "vitals")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "detonate [Explosive] - Args: c4, vs50, tm46, all")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "noclip")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "clip")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "spawn [Item] [Amount]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "kit [Kit Name] - Args: g36k, fal, health, base, car")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "printv - show all vehicles in the server")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "bringv [Vehicle]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "spec [Player]")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "killzombs")
+				wait(0.05)
+				cconsole()
+				cmsg(prefix .. "god")
+			end
+		end
+		
+		commands.jp = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			elseif tonumber(args[1]) == nil then
+				cconsole()
+				cmsg("'" .. args[1] .. "' is not a valid number!")
+			else
+				plr.Character.Humanoid.JumpPower = args[1]
+				cconsole()
+				cmsg("Set " .. plr.Name .. "'s JumpPower to " .. args[1])
+			end
+		end
+		
+		commands.nofog = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				game.Lighting.FogEnd = 100000
+				game.Lighting.FogStart = 10000
+				cconsole()
+				cmsg("Cleared fog")
+			end
+		end
+		
+		commands.tpbodies = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				if game.Workspace:FindFirstChild("Corpse") then
+					for i,v in pairs(workspace:GetChildren()) do
+						if v.Name == "Corpse" then
+							v:MoveTo(workspace[game.Players.LocalPlayer.Name].Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+						end
+					end
+					cconsole()
+					cmsg("Teleported bodies")
+				else
+					cconsole()
+					cmsg("There are no bodies in this server")
+				end
+			end
+		end
+		
+		commands.tpcrates = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				if game.Workspace:FindFirstChild("LargeCrateOpen") or game.Workspace:FindFirstChild("SmallCrateOpen") then
+					for _,v in pairs(workspace:children()) do
+						if v.Name == "LargeCrateOpen" or v.Name == "SmallCrateOpen" then
+							v:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+						end
+					end
+					cconsole()
+					cmsg("Teleported crates")
+				else
+					cconsole()
+					cmsg("There are no crates in this server")
+				end
+			end
+		end
+		
+		commands.setammo = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			elseif tonumber(args[1]) == nil then
+				cconsole()
+				cmsg("'" .. args[1] .. "' is not a valid number!")
+			else
+				local client = game:GetService("Players").LocalPlayer
+				local ammo_ammount = args[1]
+				
+				local fillers = {"a","B","i","P","Y","S"}
+				local alphabet = {"A","C","d","g","L","p","s","T","Z"}
+				local obfuscate = function(val)
+				   local newval = ""
+				   val = tostring(val)
+				   
+				   for _ = 1, 10 - string.len(val) do
+				       newval = fillers[math.random(1,6)] .. newval
+				   end
+				   
+				   for d = 1, string.len(val) do
+				       local num = tonumber(string.sub(val,d,d))
+				       if num > 0 then
+				           newval = newval .. alphabet[num]
+				       else
+				           newval = newval .. fillers[math.random(1,6)]
+				       end
+				   end
+				   
+				   return newval
+				end
+				
+				for k, v in next, client.playerstats.slots:GetChildren() do
+				   if v:FindFirstChild("ObjectID") then
+				       if v:FindFirstChild("ObjectID"):FindFirstChild("Clip") then
+				           v.ObjectID.Clip.MaxClip.Value = ammo_ammount
+							wait()
+				           v.ObjectID.Clip.Value = obfuscate(ammo_ammount)
+				       end
+				   end
+				end
+				cconsole()
+				cmsg("Set " .. plr.Name .. "'s ammo to " .. args[1])
+			end
+		end
+		
+		commands.vitals = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				game.Players.LocalPlayer.playerstats.Thirst.Value = math.huge
+				game.Players.LocalPlayer.playerstats.Hunger.Value = math.huge
+				cconsole()
+				cmsg("Gave " .. plr.Name .. " vitals")
+			end
+		end
+		
+		commands.clear = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				commandoutput:ClearAllChildren()
+				posm = UDim2.new(0,64,0,0)
+				posc = UDim2.new(0,0,0,0)
+				posextram = UDim2.new(0,5,0,0)
+				commandoutput.CanvasSize = UDim2.new(0,0,0,0)
+				Buttons = 1
+				wait(0.1)
+				cconsole()
+				cmsg("Cleared console")
+			end
+		end
+		
+		commands.detonate = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			elseif args[1] == "c4" then
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "C4Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				cconsole()
+				cmsg("Detonated all C4 in the server")
+			elseif args[1] == "vs50" then
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "VS50Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				cconsole()
+				cmsg("Detonated all VS50 in the server")
+			elseif args[1] == "tm46" then
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "TM46Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				cconsole()
+				cmsg("Detonated all TM46 in the server")
+			elseif args[1] == "all" then
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "C4Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "VS50Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				for i,v in pairs(workspace:GetChildren()) do
+				    if v.Name == "TM46Placed" then
+				        game.Workspace.Remote.Detonate:FireServer(v)
+				    end
+				end
+				cconsole()
+				cmsg("Detonated all Explosives in the server")
+			else
+				invalidArgs()
+			end
+		end
+		
+		commands.noclip = function(plr, args)
+			if args[1] then
+				invalidArgs()
+			else
+				noclipping = true
+				cconsole()
+				cmsg("Enabled noclip")
+				repeat
+					game.Players.LocalPlayer.Character.Humanoid:ChangeState(11);
+					wait()
+				until noclipping == false
+			end
+		end
+		
+		commands.clip = function(plr, args)
+			if args[1] then
+				invalidArgs()
+			else
+				noclipping = false
+				cconsole()
+				cmsg("Disabled noclip")
+			end
+		end
+		
+		commands.prefix = function(plr, args)
+			if args[2] then
+				tooManyArgs()
+			elseif not args[1] then
+				invalidArgs()
+			else
+				prefix = args[1]
+				cconsole()
+				cmsg("Set prefix to " .. args[1])
+			end
+		end
+		
+		commands.spawn = function(plr, args)
+			if args[3] then
+				tooManyArgs()
+			elseif not args[1] then
+				invalidArgs()
+			else
+				local itemToSpawn = nil
+				if not game.Lighting.LootDrops:FindFirstChild(args[1]) then
+					for i, item in ipairs(game:GetService("Lighting").LootDrops:GetChildren()) do
+						local dupl = false;
+						for i, input in ipairs(string.lower(args[1]):split(", ")) do
+							if (not dupl and string.find(string.lower(item.Name), input, 1, true)) then
+								itemToSpawn = item.Name
+								dupl = true;
+							end
+						end
+					end
+				else
+					itemToSpawn = args[1]
+				end
+				if itemToSpawn == nil then
+					cconsole()
+					cmsg(args[1] .. " Is not a valid item!")
+				elseif args[2] then
+					if tonumber(args[2]) == nil then
+						cconsole()
+						cmsg(args[2] .. " Is not a valid number!")
+					elseif tonumber(args[2]) > 30 then
+						cconsole()
+						cmsg("Cant spawn more than 30 items at a time")
+					else
+						for i = 1, tonumber(args[2]) do
+							spawnItem(itemToSpawn)
+						end
+						cconsole()
+						cmsg("Spawned " .. itemToSpawn .. " " .. args[2])
+					end
+				elseif not args[2] then
+					spawnItem(itemToSpawn)
+					cconsole()
+					cmsg("Spawned " .. itemToSpawn .. " 1")
+				end
+			end
+		end
+		
+		commands.kit = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			elseif not args[1] == "g36k" or not args[1] == "fal" or not args[1] == "health" or not args[1] == "base" or not args[1] == "car" then
+				invalidArgs()
+			elseif args[1] == "g36k" then
+				local function s(n)
+					local new = game.Lighting.LootDrops[n]:Clone()
+					new.Parent = workspace
+					new:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+				end
+				local spawner ={"G36K","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","STANAGAmmo100","ACOG","Suppressor556","MilitaryPackBlack","Grip"}
+			
+				for sp = 1, #spawner do
+					s(spawner[sp])
+				end
+				cconsole()
+				cmsg("Gave " .. plr.Name .. " G36K kit")
+			elseif args[1] == "fal" then
+				local function s(n)
+					local new = game.Lighting.LootDrops[n]:Clone()
+					new.Parent = workspace
+					new:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+				end
+				local spawner ={"FAL","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","M14Ammo50","ACOG","Suppressor762","MilitaryPackBlack","Grip"}
+			
+				for sp = 1, #spawner do
+					s(spawner[sp])
+				end
+				cconsole()
+				cmsg("Gave " .. plr.Name .. " FAL kit")
+			elseif args[1] == "health" then
+				local function s(n)
+					local new = game.Lighting.LootDrops[n]:Clone()
+					new.Parent = workspace
+					new:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+				end
+				local spawner ={"BloodBag","BloodBag","BloodBag","BloodBag","Painkillers","Painkillers","WaterBottle","WaterBottle","MRE","MRE"}
+			
+				for sp = 1, #spawner do
+					s(spawner[sp])
+				end
+			elseif args[1] == "base" then
+				local function s(n)
+					local new = game.Lighting.LootDrops[n]:Clone()
+					new.Parent = workspace
+					new:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+				end
+				local  spawner ={"Material5","Material5","Material5","Material3","Material4","LargeCrate","LargeCrate","Entrencher"}
+			
+				for sp = 1, #spawner do
+					s(spawner[sp])
+				end
+				cconsole()
+				cmsg("Gave " .. plr.Name .. " Base kit")
+			elseif args[1] == "car" then
+				local function s(n)
+					local new = game.Lighting.LootDrops[n]:Clone()
+					new.Parent = workspace
+					new:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+				end
+				local spawner ={"ReinforcedWheel","ReinforcedWheel","ReinforcedWheel","ReinforcedWheel","ScrapMetal","EngineParts","FuelTank","BallisticGlass","ArmorPlates","JerryCan","JerryCan"}
+			
+				for sp = 1, #spawner do
+					s(spawner[sp])
+				end
+				cconsole()
+				cmsg("Gave " .. plr.Name .. " Car kit")
+			end
+		end
+		
+		commands.printv = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				for _,v in pairs(game.Workspace.Vehicles:GetChildren()) do
+					wait(0.05)
+					cconsole()
+					cmsg(v.Name)
+				end
+			end
+		end
+		
+		commands.bringv = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			elseif not game.Workspace.Vehicles:FindFirstChild(args[1]) then
+				cconsole()
+				cmsg(args[1] .. " is not in the server")
+			else
+				cconsole()
+				cmsg("Teleported " .. args[1] .. " to " .. plr.Name)
+				local SelectedVehicle = args[1]
+				local Check = game.Workspace.Vehicles:FindFirstChild(SelectedVehicle)
+				if Check then
+					tpcarsecured(SelectedVehicle)
+				end
+			end
+		end
+
+		commands.spec = function(plr, args)
+			if not args[1] then
+				invalidArgs()
+			elseif args[2] then
+				tooManyArgs()
+			else
+				local playerToSpec = nil
+				if string.lower(args[1]) == "me" then
+					playerToSpec = game.Players.LocalPlayer
+				else
+					for i, plyr in ipairs(game:service"Players":GetPlayers()) do
+						local dupl = false;
+						for i, input in ipairs(string.lower(args[1]):split(", ")) do
+							if (not dupl and string.find(string.lower(plyr.Name), input, 1, true) == 1) then
+								playerToSpec = plyr
+								dupl = true;
+							end
+						end
+					end
+				end
+				if playerToSpec == nil then
+					cconsole()
+					cmsg(args[1] .. " Is not a valid player!")
+				else
+					game.Workspace.CurrentCamera.CameraSubject = game.Players[playerToSpec.Name].Character.Humanoid
+					cconsole()
+					cmsg("Now spectating " .. playerToSpec.Name)
+				end
+			end
+		end
+
+		commands.killzombs = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				for _, v in pairs(game.Workspace.Zombies:GetDescendants()) do
+					if v:FindFirstChild("Humanoid") then
+						game.Workspace.Remote.DamageZombie:FireServer(v:FindFirstChild("Humanoid"), 1000)
+					end
+				end
+				cconsole()
+				cmsg("Killed zombies")
+			end
+		end
+
+		commands.god = function(plr, args)
+			if args[1] then
+				tooManyArgs()
+			else
+				game:GetService("RunService").RenderStepped:connect(function()
+				
+				end)
+				game:GetService("Players").LocalPlayer.Character.Humanoid.Name = 1
+				local l = game:GetService("Players").LocalPlayer.Character["1"]:Clone()
+				l.Parent = game:GetService("Players").LocalPlayer.Character
+				l.Name = "Humanoid"
+				wait(0.1)
+				game:GetService("Players").LocalPlayer.Character["1"]:Destroy()
+				game:GetService("Workspace").CurrentCamera.CameraSubject = game:GetService("Players").LocalPlayer.Character
+				game:GetService("Players").LocalPlayer.Character.Animate.Disabled = true
+				wait(0.1)
+				game:GetService("Players").LocalPlayer.Character.Animate.Disabled = false
+				game:GetService("Players").LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
+				game:GetService("RunService").RenderStepped:connect(function()
+				end)
+				cconsole()
+				cmsg("Godded " .. plr.Name)
+			end
+		end
+		
+		cmdbox.FocusLost:Connect(function()
+			local message = cmdbox.Text
+			cmdbox.Text = ""
+			local splitString = message:split(" ")
+			local command = splitString[1]
+			local splitCmd = command:split(prefix)
+			local cmd = splitCmd[2]
+			
+			if message == "" then
+
+			else
+				if commands[cmd] then
+					
+					local args = {}
+					
+					for i = 2, #splitString, 1 do
+						table.insert(args, splitString[i])
+					end
+					
+					commands[cmd](game.Players.LocalPlayer, args)
+					
+				else
+					cconsole()
+					cmsg(command .. " is not a valid command!")
+				end
+			end
+		end)
+
+		game.Workspace.Remote.Chat.OnClientEvent:connect(function(...)
+			local Data = (...)
+			if Data.Speaker == game.Players.LocalPlayer then
+				if string.sub(Data.Message, 1, 1) == prefix then
+					local message = (Data.Message)
+					local splitString = message:split(" ")
+					local command = splitString[1]
+					local splitCmd = command:split(prefix)
+					local cmd = splitCmd[2]
+					
+					if commands[cmd] then
+						
+						local args = {}
+						
+						for i = 2, #splitString, 1 do
+							table.insert(args, splitString[i])
+						end
+						
+						commands[cmd](game.Players.LocalPlayer, args)
+						
+					else
+						cconsole()
+						cmsg(command .. " is not a valid command!")
+					end
+				else
+
+				end
+			else
+
+			end
+		end)
+
+decor2.Name = "decor2"
+decor2.Parent = cmdframe
+decor2.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+decor2.BorderColor3 = Color3.fromRGB(255, 75, 75)
+decor2.Position = UDim2.new(1, -460, 1, -20)
+decor2.Size = UDim2.new(0, 459, 0, 0)
+decor2.ZIndex = 2
+
+title.Name = "title"
+title.Parent = drag
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Size = UDim2.new(0, 500, 0, 22)
+title.ZIndex = 7
+title.Font = Enum.Font.Fantasy
+title.Text = "Yanex - V 1.C"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.TextSize = 14.000
+title.TextWrapped = true
+
+consoleb.Name = "consoleb"
+consoleb.Parent = drag
+consoleb.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+consoleb.BorderSizePixel = 0
+consoleb.ClipsDescendants = true
+consoleb.Position = UDim2.new(0, 0, 0, 23)
+consoleb.Size = UDim2.new(0, 40, 0, 125)
+consoleb.ZIndex = 4
+consoleb.AutoButtonColor = false
+consoleb.Font = Enum.Font.GothamBold
+consoleb.Text = ""
+consoleb.TextColor3 = Color3.fromRGB(255, 255, 255)
+consoleb.TextScaled = true
+consoleb.TextSize = 14.000
+consoleb.TextWrapped = true
+consoleb.MouseButton1Click:Connect(function()
+			mainframe.Visible = false
+			cmdframe.Visible = true
+			local c = Sample:Clone()
+			c.Parent = consoleb
+			local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+			c.Position = UDim2.new(0, x, 0, y)
+			local len, size = 1, nil
+			if consoleb.AbsoluteSize.X >= consoleb.AbsoluteSize.Y then
+				size = (consoleb.AbsoluteSize.X * 1.5)
+			else
+				size = (consoleb.AbsoluteSize.Y * 1.5)
+			end
+			c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+			for i = 1, 10 do
+				c.ImageTransparency = c.ImageTransparency + 0.05
+				wait(len / 12)
+			end
+			c:Destroy()
+		end)
+
+consolelabel.Name = "consolelabel"
+consolelabel.Parent = consoleb
+consolelabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+consolelabel.BackgroundTransparency = 1.000
+consolelabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+consolelabel.Position = UDim2.new(0, -40, 0, 37)
+consolelabel.Rotation = -90.000
+consolelabel.Size = UDim2.new(0, 120, 0, 50)
+consolelabel.ZIndex = 4
+consolelabel.Font = Enum.Font.Fantasy
+consolelabel.Text = "Console"
+consolelabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+consolelabel.TextScaled = true
+consolelabel.TextSize = 14.000
+consolelabel.TextWrapped = true
+
+mainb.Name = "mainb"
+mainb.Parent = drag
+mainb.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainb.BorderSizePixel = 0
+mainb.ClipsDescendants = true
+mainb.Position = UDim2.new(0, 0, 0, 174)
+mainb.Size = UDim2.new(0, 40, 0, 125)
+mainb.ZIndex = 4
+mainb.AutoButtonColor = false
+mainb.Font = Enum.Font.GothamBold
+mainb.Text = ""
+mainb.TextColor3 = Color3.fromRGB(255, 255, 255)
+mainb.TextScaled = true
+mainb.TextSize = 14.000
+mainb.TextWrapped = true
+mainb.MouseButton1Click:Connect(function()
+			cmdframe.Visible = false
+			mainframe.Visible = true
+			local c = Sample:Clone()
+			c.Parent = mainb
+			local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+			c.Position = UDim2.new(0, x, 0, y)
+			local len, size = 1, nil
+			if mainb.AbsoluteSize.X >= mainb.AbsoluteSize.Y then
+				size = (mainb.AbsoluteSize.X * 1.5)
+			else
+				size = (mainb.AbsoluteSize.Y * 1.5)
+			end
+			c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+			for i = 1, 10 do
+				c.ImageTransparency = c.ImageTransparency + 0.05
+				wait(len / 12)
+			end
+			c:Destroy()
+		end)
+
+mainlabel.Name = "mainlabel"
+mainlabel.Parent = mainb
+mainlabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+mainlabel.BackgroundTransparency = 1.000
+mainlabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+mainlabel.Position = UDim2.new(0, -40, 0, 37)
+mainlabel.Rotation = -90.000
+mainlabel.Size = UDim2.new(0, 120, 0, 50)
+mainlabel.ZIndex = 4
+mainlabel.Font = Enum.Font.Fantasy
+mainlabel.Text = "Main"
+mainlabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+mainlabel.TextScaled = true
+mainlabel.TextSize = 14.000
+mainlabel.TextWrapped = true
+
+decorside.Name = "decorside"
+decorside.Parent = drag
+decorside.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+decorside.BorderColor3 = Color3.fromRGB(255, 75, 75)
+decorside.Position = UDim2.new(0, 40, 0, 22)
+decorside.Size = UDim2.new(0, 0, 0, 277)
+decorside.ZIndex = 5
+
+Sample.Name = "Sample"
+Sample.Parent = drag
+Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Sample.BackgroundTransparency = 1.000
+Sample.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Sample.ZIndex = 5
+Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+Sample.ImageColor3 = Color3.fromRGB(255, 75, 75)
+Sample.ImageTransparency = 0.600
+
+mainframe.Name = "mainframe"
+mainframe.Parent = drag
+mainframe.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainframe.BorderSizePixel = 0
+mainframe.Size = UDim2.new(0, 500, 0, 300)
+mainframe.Visible = false
+
+main.Name = "main"
+main.Parent = mainframe
+main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+main.BorderColor3 = Color3.fromRGB(255, 75, 75)
+main.Position = UDim2.new(0, 50, 0, 33)
+main.Size = UDim2.new(0, 115, 0, 110)
+
+maintitle.Name = "maintitle"
+maintitle.Parent = main
+maintitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+maintitle.Size = UDim2.new(0, 115, 0, 15)
+maintitle.BorderSizePixel = 0
+maintitle.Font = Enum.Font.Fantasy
+maintitle.Text = "Main"
+maintitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+maintitle.TextScaled = true
+maintitle.TextSize = 14.000
+maintitle.TextWrapped = true
+
+esp.Name = "esp"
+esp.Parent = main
+esp.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+esp.BorderColor3 = Color3.fromRGB(20, 20, 20)
+esp.BorderSizePixel = 4
+esp.Position = UDim2.new(0, 10, 0, 25)
+esp.Size = UDim2.new(0, 20, 0, 20)
+esp.AutoButtonColor = false
+esp.Font = Enum.Font.SourceSans
+esp.Text = ""
+esp.TextColor3 = Color3.fromRGB(0, 0, 0)
+esp.TextSize = 14.000
+local esp1 = false
+local player = game.Players.LocalPlayer
+esp.MouseButton1Click:Connect(function()
+	if esp1 == false then
+		esp1 = true
+		esp.BackgroundColor3 = Color3.fromRGB(255,75,75)
+		while esp1 == true do
+			executeEsp()
+			wait(5)
+			for i,v in ipairs(game.Workspace.CurrentCamera:GetChildren()) do
+				if v.Name == 'EspBillboard' then
+					v:Destroy()
+				end
+			end
+			wait()
+		end
+	elseif esp1 == true then
+		esp1 = false
+		esp.BackgroundColor3 = Color3.fromRGB(20,20,20)
+		for i,v in ipairs(game.Workspace.CurrentCamera:GetChildren()) do
+			if v.Name == 'EspBillboard' then
+				v:Destroy()
+			end
+		end
+	end
+end)
+
+infstamina.Name = "inf. stamina"
+infstamina.Parent = main
+infstamina.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+infstamina.BorderColor3 = Color3.fromRGB(20, 20, 20)
+infstamina.BorderSizePixel = 4
+infstamina.Position = UDim2.new(0, 10, 0, 70)
+infstamina.Size = UDim2.new(0, 20, 0, 20)
+infstamina.AutoButtonColor = false
+infstamina.Font = Enum.Font.SourceSans
+infstamina.Text = ""
+infstamina.TextColor3 = Color3.fromRGB(0, 0, 0)
+infstamina.TextSize = 14.000
+local staminaon = false
+		infstamina.MouseButton1Click:Connect(function()
+			if staminaon == false then
+				staminaon = true
+				infstamina.BackgroundColor3 = Color3.fromRGB(255,75,75)
+				while staminaon == true do
+					wait()
+					game.Players.LocalPlayer.Backpack.GlobalFunctions.Stamina.Value = 100
+				end
+			else
+				staminaon = false
+				infstamina.BackgroundColor3 = Color3.fromRGB(20,20,20)
+			end
+		end)
+
+esplabel.Name = "esplabel"
+esplabel.Parent = main
+esplabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+esplabel.BackgroundTransparency = 1.000
+esplabel.Position = UDim2.new(0, 40, 0, 25)
+esplabel.Size = UDim2.new(0, 75, 0, 20)
+esplabel.Font = Enum.Font.Fantasy
+esplabel.Text = "ESP"
+esplabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+esplabel.TextScaled = true
+esplabel.TextSize = 14.000
+esplabel.TextWrapped = true
+esplabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local function change(instance, action)
+	if action == "On" then
+		instance.BackgroundColor3 = Color3.fromRGB(255,75,75)
+	else
+		instance.BackgroundColor3 = Color3.fromRGB(20,20,20)
+	end
+end
+
+staminalabel.Name = "staminalabel"
+staminalabel.Parent = main
+staminalabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+staminalabel.BackgroundTransparency = 1.000
+staminalabel.Position = UDim2.new(0, 40, 0, 70)
+staminalabel.Size = UDim2.new(0, 75, 0, 20)
+staminalabel.Font = Enum.Font.Fantasy
+staminalabel.Text = "Stamina"
+staminalabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+staminalabel.TextScaled = true
+staminalabel.TextSize = 14.000
+staminalabel.TextWrapped = true
+staminalabel.TextXAlignment = Enum.TextXAlignment.Left
+
+particals.Name = "explosives"
+particals.Parent = mainframe
+particals.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+particals.BorderColor3 = Color3.fromRGB(255, 75, 75)
+particals.Position = UDim2.new(0, 170, 0, 33)
+particals.Size = UDim2.new(0, 130, 0, 152)
+
+partiacalstitle.Name = "explosivestitle"
+partiacalstitle.Parent = particals
+partiacalstitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+partiacalstitle.Size = UDim2.new(0, 130, 0, 15)
+partiacalstitle.BorderSizePixel = 0
+partiacalstitle.Font = Enum.Font.Fantasy
+partiacalstitle.Text = "Explosives"
+partiacalstitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+partiacalstitle.TextScaled = true
+partiacalstitle.TextSize = 14.000
+partiacalstitle.TextWrapped = true
+
+fire.Name = "c4walk"
+fire.Parent = particals
+fire.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+fire.BorderColor3 = Color3.fromRGB(20, 20, 20)
+fire.BorderSizePixel = 4
+fire.Position = UDim2.new(0, 10, 0, 25)
+fire.Size = UDim2.new(0, 20, 0, 20)
+fire.AutoButtonColor = false
+fire.Font = Enum.Font.SourceSans
+fire.Text = ""
+fire.TextColor3 = Color3.fromRGB(0, 0, 0)
+fire.TextSize = 14.000
+local C4On = false
+local Plr = game.Players.LocalPlayer
+local materialc4 = game.Lighting.Materials.C4Placed
+fire.MouseButton1Click:connect(function()
+	local pos = Plr.Character.Torso.Position
+	if C4On == false then
+		C4On = true
+		change(fire, "On")
+		repeat
+			game.Workspace.Remote.PlaceC4:FireServer(materialc4, pos, true)
+			wait()
+		until C4On == false
+	elseif C4On == true then
+		C4On = false
+		change(fire, "Off")
+	end
+end)
+
+sparkles.Name = "vs50walk"
+sparkles.Parent = particals
+sparkles.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+sparkles.BorderColor3 = Color3.fromRGB(20, 20, 20)
+sparkles.BorderSizePixel = 4
+sparkles.Position = UDim2.new(0, 10, 0, 70)
+sparkles.Size = UDim2.new(0, 20, 0, 20)
+sparkles.AutoButtonColor = false
+sparkles.Font = Enum.Font.SourceSans
+sparkles.Text = ""
+sparkles.TextColor3 = Color3.fromRGB(0, 0, 0)
+sparkles.TextSize = 14.000
+local perOn = false
+local materialper = game.Lighting.Materials.VS50Placed
+sparkles.MouseButton1Click:connect(function()
+	local pos = Plr.Character.Torso.Position
+	if perOn == false then
+		perOn = true
+		change(sparkles, "On")
+		repeat
+			game.Workspace.Remote.PlaceC4:FireServer(materialper, pos, true)
+			wait()
+		until perOn == false
+	elseif perOn == true then
+		perOn = false
+		change(sparkles, "Off")
+	end
+end)
+
+firelabel.Name = "firelabel"
+firelabel.Parent = particals
+firelabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+firelabel.BackgroundTransparency = 1.000
+firelabel.Position = UDim2.new(0, 40, 0, 25)
+firelabel.Size = UDim2.new(0, 90, 0, 20)
+firelabel.Font = Enum.Font.Fantasy
+firelabel.Text = "C4 Walk"
+firelabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+firelabel.TextScaled = true
+firelabel.TextSize = 14.000
+firelabel.TextWrapped = true
+firelabel.TextXAlignment = Enum.TextXAlignment.Left
+
+sparkleslabel.Name = "sparkleslabel"
+sparkleslabel.Parent = particals
+sparkleslabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+sparkleslabel.BackgroundTransparency = 1.000
+sparkleslabel.Position = UDim2.new(0, 40, 0, 70)
+sparkleslabel.Size = UDim2.new(0, 90, 0, 20)
+sparkleslabel.Font = Enum.Font.Fantasy
+sparkleslabel.Text = "VS-50 Walk"
+sparkleslabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+sparkleslabel.TextScaled = true
+sparkleslabel.TextSize = 14.000
+sparkleslabel.TextWrapped = true
+sparkleslabel.TextXAlignment = Enum.TextXAlignment.Left
+
+smoke.Name = "tm46walk"
+smoke.Parent = particals
+smoke.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+smoke.BorderColor3 = Color3.fromRGB(20, 20, 20)
+smoke.BorderSizePixel = 4
+smoke.Position = UDim2.new(0, 10, 0, 115)
+smoke.Size = UDim2.new(0, 20, 0, 20)
+smoke.AutoButtonColor = false
+smoke.Font = Enum.Font.SourceSans
+smoke.Text = ""
+smoke.TextColor3 = Color3.fromRGB(0, 0, 0)
+smoke.TextSize = 14.000
+local carOn = false
+local materialcar = game.Lighting.Materials.TM46Placed
+smoke.MouseButton1Click:connect(function()
+	local pos = Plr.Character.Torso.Position
+	if carOn == false then
+		carOn = true
+		change(smoke, "On")
+		repeat
+			game.Workspace.Remote.PlaceC4:FireServer(materialcar, pos, true)
+			wait()
+		until carOn == false
+	elseif carOn == true then
+		carOn = false
+		change(smoke, "Off")
+	end
+end)
+
+smokelabel.Name = "smokelabel"
+smokelabel.Parent = particals
+smokelabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+smokelabel.BackgroundTransparency = 1.000
+smokelabel.Position = UDim2.new(0, 40, 0, 115)
+smokelabel.Size = UDim2.new(0, 90, 0, 20)
+smokelabel.Font = Enum.Font.Fantasy
+smokelabel.Text = "TM-46 Walk"
+smokelabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+smokelabel.TextScaled = true
+smokelabel.TextSize = 14.000
+smokelabel.TextWrapped = true
+smokelabel.TextXAlignment = Enum.TextXAlignment.Left
+
+spawning.Name = "spawning"
+spawning.Parent = mainframe
+spawning.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+spawning.BorderColor3 = Color3.fromRGB(255, 75, 75)
+spawning.Position = UDim2.new(0.899999976, -145, 0, 33)
+spawning.Size = UDim2.new(0, 185, 0, 115)
+
+itemplayer.Name = "itemplayer"
+itemplayer.Parent = spawning
+itemplayer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+itemplayer.BorderSizePixel = 0
+itemplayer.Position = UDim2.new(0, 5, 0, 50)
+itemplayer.Size = UDim2.new(0, 175, 0, 25)
+itemplayer.Font = Enum.Font.Fantasy
+itemplayer.PlaceholderText = "Player"
+itemplayer.Text = ""
+itemplayer.TextColor3 = Color3.fromRGB(255, 255, 255)
+itemplayer.TextScaled = true
+itemplayer.TextSize = 14.000
+itemplayer.TextWrapped = true
+itemplayer.Visible = false
+
+spawningtitle.Name = "spawningtitle"
+spawningtitle.Parent = spawning
+spawningtitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+spawningtitle.Size = UDim2.new(0, 185, 0, 15)
+spawningtitle.BorderSizePixel = 0
+spawningtitle.Font = Enum.Font.Fantasy
+spawningtitle.Text = "Spawning"
+spawningtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+spawningtitle.TextScaled = true
+spawningtitle.TextSize = 14.000
+spawningtitle.TextWrapped = true
+
+item.Name = "item"
+item.Parent = spawning
+item.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+item.BorderSizePixel = 0
+item.Position = UDim2.new(0, 5, 0, 20)
+item.Size = UDim2.new(0, 145, 0, 25)
+item.Font = Enum.Font.Fantasy
+item.PlaceholderText = "Item"
+item.Text = ""
+item.TextColor3 = Color3.fromRGB(255, 255, 255)
+item.TextScaled = true
+item.TextSize = 14.000
+item.TextWrapped = true
+local itemToSpawn2 = nil
+item.FocusLost:Connect(function()
+	if item.Text == "" then
+
+	elseif not game.Lighting.LootDrops:FindFirstChild(item.Text) then
+		for i, item2 in ipairs(game:GetService("Lighting").LootDrops:GetChildren()) do
+			local dupl = false;
+			for i, input in ipairs(string.lower(item.Text):split(", ")) do
+				if (not dupl and string.find(string.lower(item2.Name), input, 1, true)) then
+					itemToSpawn2 = item2.Name
+					item.Text = item2.Name
+					dupl = true;
+				end
+			end
+		end
+	else
+		itemToSpawn2 = item.Text
+	end
+end)
+
+amount.Name = "amount"
+amount.Parent = spawning
+amount.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+amount.BorderSizePixel = 0
+amount.Position = UDim2.new(1, -30, 0, 20)
+amount.Size = UDim2.new(0, 25, 0, 25)
+amount.Font = Enum.Font.Fantasy
+amount.PlaceholderText = "#"
+amount.Text = ""
+amount.TextColor3 = Color3.fromRGB(255, 255, 255)
+amount.TextScaled = true
+amount.TextSize = 14.000
+amount.TextWrapped = true
+
+spawn.Name = "spawn"
+spawn.Parent = spawning
+spawn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+spawn.BorderSizePixel = 0
+spawn.ClipsDescendants = true
+spawn.Position = UDim2.new(0, 5, 0, 85)
+spawn.Size = UDim2.new(0, 175, 0, 25)
+spawn.AutoButtonColor = false
+spawn.Font = Enum.Font.Fantasy
+spawn.Text = "Spawn item"
+spawn.TextColor3 = Color3.fromRGB(255, 255, 255)
+spawn.TextScaled = true
+spawn.TextSize = 14.000
+spawn.TextWrapped = true
+spawn.MouseButton1Click:Connect(function()
+	local c = Sample:Clone()
+	c.Parent = spawn
+	local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+	c.Position = UDim2.new(0, x, 0, y)
+	local len, size = 1, nil
+	if spawn.AbsoluteSize.X >= spawn.AbsoluteSize.Y then
+		size = (spawn.AbsoluteSize.X * 1.5)
+	else
+		size = (spawn.AbsoluteSize.Y * 1.5)
+	end
+	c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+	for i = 1, 10 do
+		c.ImageTransparency = c.ImageTransparency + 0.05
+		wait(len / 12)
+	end
+	c:Destroy()
+
+	if itemToSpawn2 == nil then
+		Message_Client(item.Text .. " Is not a valid item!", "Red")
+	elseif amount.Text == "" then
+		spawnItem(itemToSpawn2)
+		Message_Client("Spawned " .. itemToSpawn2 .. " 1", "Green")
+	else
+		if tonumber(amount.Text) == nil then
+			Message_Client(amount.Text .. " Is not a valid number!", "Red")
+		elseif tonumber(amount.Text) > 30 then
+			Message_Client("Cant spawn more than 30 items at a time!", "Red")
+		else
+			for i = 1, tonumber(amount.Text) do
+				spawnItem(itemToSpawn2)
+			end
+			Message_Client("Spawned " .. itemToSpawn2 .. " " .. amount.Text, "Green")
+		end
+	end
+end)
+
+players.Name = "players"
+players.Parent = mainframe
+players.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+players.BorderColor3 = Color3.fromRGB(255, 75, 75)
+players.Position = UDim2.new(0, 50, 0, 148)
+players.Size = UDim2.new(0, 115, 0, 87)
+
+playertitle.Name = "playertitle"
+playertitle.Parent = players
+playertitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+playertitle.Size = UDim2.new(0, 115, 0, 15)
+playertitle.Font = Enum.Font.Fantasy
+playertitle.Text = "Players"
+playertitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+playertitle.TextScaled = true
+playertitle.TextSize = 14.000
+playertitle.TextWrapped = true
+playertitle.BorderSizePixel = 0
+
+playerr.Name = "playerr"
+playerr.Parent = players
+playerr.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+playerr.BorderSizePixel = 0
+playerr.Position = UDim2.new(0, 5, 0, 15)
+playerr.Size = UDim2.new(0, 105, 0, 25)
+playerr.Font = Enum.Font.Fantasy
+playerr.PlaceholderText = "Player"
+playerr.Text = ""
+playerr.TextColor3 = Color3.fromRGB(255, 255, 255)
+playerr.TextScaled = true
+playerr.TextSize = 14.000
+playerr.TextWrapped = true
+local playerToPull = nil
+playerr.FocusLost:Connect(function()
+	if playerr.Text == "" then
+
+	elseif not game.Players:FindFirstChild(playerr.Text) then
+		for i, plyr in ipairs(game:service"Players":GetPlayers()) do
+			local dupl = false;
+			for i, input in ipairs(string.lower(playerr.Text):split(", ")) do
+				if (not dupl and string.find(string.lower(plyr.Name), input, 1, true) == 1) then
+					playerToPull = plyr
+					playerr.Text = plyr.Name
+					dupl = true;
+				end
+			end
+		end
+	else
+		playerToPull = playerr.Text
+	end
+end)
+
+pull.Name = "pull"
+pull.Parent = players
+pull.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+pull.BorderColor3 = Color3.fromRGB(20, 20, 20)
+pull.BorderSizePixel = 4
+pull.Position = UDim2.new(0, 10, 0, 50)
+pull.Size = UDim2.new(0, 20, 0, 20)
+pull.AutoButtonColor = false
+pull.Font = Enum.Font.SourceSans
+pull.Text = ""
+pull.TextColor3 = Color3.fromRGB(0, 0, 0)
+pull.TextSize = 14.000
+local pulling = false
+		pull.MouseButton1Click:Connect(function()
+		local pullvictim = playerr.text
+		local pos = game.Players.LocalPlayer.Character.Torso.Position
+		if pulling == false then
+			pulling = true
+			pull.BackgroundColor3 = Color3.fromRGB(255,75,75)
+			repeat
+				game:GetService("RunService").RenderStepped:connect(function()
+				end)
+				while pulling == true do 
+					wait(0.1)
+					for _,v in pairs(workspace:children()) do
+						if v.Name == pullvictim then
+							v:MoveTo(game.Players.LocalPlayer.Character.Torso.Position + Vector3.new(math.random(3,3),0,math.random(3,3)))
+						end
+					end
+				end
+
+			wait()
+			until pulling == false
+		elseif pulling == true then
+			pull.BackgroundColor3 = Color3.fromRGB(20,20,20)
+			pulling = false
+		end
+	end)
+
+pulllabel.Name = "pulllabel"
+pulllabel.Parent = players
+pulllabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+pulllabel.BackgroundTransparency = 1.000
+pulllabel.Position = UDim2.new(0, 35, 0, 50)
+pulllabel.Size = UDim2.new(0, 75, 0, 20)
+pulllabel.Font = Enum.Font.Fantasy
+pulllabel.Text = "Pull"
+pulllabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+pulllabel.TextScaled = true
+pulllabel.TextSize = 14.000
+pulllabel.TextWrapped = true
+pulllabel.TextXAlignment = Enum.TextXAlignment.Left
+
+vehicles.Name = "vehicles"
+vehicles.Parent = mainframe
+vehicles.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+vehicles.BorderColor3 = Color3.fromRGB(255, 75, 75)
+vehicles.Position = UDim2.new(1, -195, 0.926999986, -125)
+vehicles.Size = UDim2.new(0, 185, 0, 137)
+
+vehicletitle.Name = "vehicletitle"
+vehicletitle.Parent = vehicles
+vehicletitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+vehicletitle.Size = UDim2.new(0, 185, 0, 15)
+vehicletitle.Font = Enum.Font.Fantasy
+vehicletitle.Text = "Vehicles"
+vehicletitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+vehicletitle.TextScaled = true
+vehicletitle.TextSize = 14.000
+vehicletitle.TextWrapped = true
+vehicletitle.BorderSizePixel = 0
+
+vehicle.Name = "vehicle"
+vehicle.Parent = vehicles
+vehicle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+vehicle.BorderSizePixel = 0
+vehicle.Position = UDim2.new(0, 5, 0, 15)
+vehicle.Size = UDim2.new(0, 175, 0, 25)
+vehicle.Font = Enum.Font.Fantasy
+vehicle.PlaceholderText = "Vehicle"
+vehicle.Text = ""
+vehicle.TextColor3 = Color3.fromRGB(255, 255, 255)
+vehicle.TextScaled = true
+vehicle.TextSize = 14.000
+vehicle.TextWrapped = true
+
+speed.Name = "speed"
+speed.Parent = vehicles
+speed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+speed.BorderSizePixel = 0
+speed.Position = UDim2.new(0, 5, 0, 45)
+speed.Size = UDim2.new(0, 175, 0, 25)
+speed.Font = Enum.Font.Fantasy
+speed.PlaceholderText = "Speed"
+speed.Text = ""
+speed.TextColor3 = Color3.fromRGB(255, 255, 255)
+speed.TextScaled = true
+speed.TextSize = 14.000
+speed.TextWrapped = true
+
+bring.Name = "bring"
+bring.Parent = vehicles
+bring.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+bring.BorderSizePixel = 0
+bring.ClipsDescendants = true
+bring.Position = UDim2.new(0, 5, 0, 77)
+bring.Size = UDim2.new(0, 175, 0, 25)
+bring.AutoButtonColor = false
+bring.Font = Enum.Font.Fantasy
+bring.Text = "Bring"
+bring.TextColor3 = Color3.fromRGB(255, 255, 255)
+bring.TextScaled = true
+bring.TextSize = 14.000
+bring.TextWrapped = true
+bring.MouseButton1Click:Connect(function()
+	local c = Sample:Clone()
+			c.Parent = bring
+			local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+			c.Position = UDim2.new(0, x, 0, y)
+			local len, size = 1, nil
+			if bring.AbsoluteSize.X >= bring.AbsoluteSize.Y then
+				size = (bring.AbsoluteSize.X * 1.5)
+			else
+				size = (bring.AbsoluteSize.Y * 1.5)
+			end
+			c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+			for i = 1, 10 do
+				c.ImageTransparency = c.ImageTransparency + 0.05
+				wait(len / 12)
+			end
+			c:Destroy()
+			
+			local SelectedVehicle = vehicle.Text
+			local Check = game.Workspace.Vehicles:FindFirstChild(SelectedVehicle)
+			if Check then
+				tpcarsecured(SelectedVehicle)
+			end
+end)
+
+setspeed.Name = "setspeed"
+setspeed.Parent = vehicles
+setspeed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+setspeed.BorderSizePixel = 0
+setspeed.ClipsDescendants = true
+setspeed.Position = UDim2.new(0, 5, 0, 107)
+setspeed.Size = UDim2.new(0, 175, 0, 25)
+setspeed.AutoButtonColor = false
+setspeed.Font = Enum.Font.Fantasy
+setspeed.Text = "Set speed"
+setspeed.TextColor3 = Color3.fromRGB(255, 255, 255)
+setspeed.TextScaled = true
+setspeed.TextSize = 14.000
+setspeed.TextWrapped = true
+setspeed.MouseButton1Click:Connect(function()
+	local c = Sample:Clone()
+		c.Parent = setspeed
+		local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+		c.Position = UDim2.new(0, x, 0, y)
+		local len, size = 1, nil
+		if setspeed.AbsoluteSize.X >= setspeed.AbsoluteSize.Y then
+			size = (setspeed.AbsoluteSize.X * 1.5)
+		else
+			size = (setspeed.AbsoluteSize.Y * 1.5)
+		end
+		c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+		for i = 1, 10 do
+			c.ImageTransparency = c.ImageTransparency + 0.05
+			wait(len / 12)
+		end
+		c:Destroy()
+		
+		game.Workspace.Vehicles[vehicle.Text].Stats.MaxSpeed.Value = speed.Text
+		game.Workspace.Vehicles[vehicle.Text].Stats.MaxSpeed.Offroad.Value = speed.Text
+end)
+
+credits.Name = "credits"
+credits.Parent = mainframe
+credits.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+credits.BorderColor3 = Color3.fromRGB(255, 75, 75)
+credits.Position = UDim2.new(0, 170, 0, 190)
+credits.Size = UDim2.new(0, 130, 0, 100)
+
+creditstitle.Name = "creditstitle"
+creditstitle.Parent = credits
+creditstitle.BackgroundColor3 = Color3.fromRGB(255, 75, 75)
+creditstitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
+creditstitle.Size = UDim2.new(0, 130, 0, 15)
+creditstitle.Font = Enum.Font.Fantasy
+creditstitle.Text = "Credits"
+creditstitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+creditstitle.TextScaled = true
+creditstitle.TextSize = 14.000
+creditstitle.TextWrapped = true
+creditstitle.BorderSizePixel = 0
+
+madeby.Name = "madeby"
+madeby.Parent = credits
+madeby.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+madeby.BorderSizePixel = 0
+madeby.Position = UDim2.new(0, 5, 0, 15)
+madeby.Size = UDim2.new(0, 120, 0, 30)
+madeby.Font = Enum.Font.Fantasy
+madeby.Text = "Made By:"
+madeby.TextColor3 = Color3.fromRGB(255, 255, 255)
+madeby.TextScaled = true
+madeby.TextSize = 14.000
+madeby.TextWrapped = true
+
+name.Name = "name"
+name.Parent = credits
+name.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+name.BorderSizePixel = 0
+name.Position = UDim2.new(0, 5, 1, -50)
+name.Size = UDim2.new(0, 120, 0, 45)
+name.Font = Enum.Font.Fantasy
+name.Text = "Zanikes#2394"
+name.TextColor3 = Color3.fromRGB(255, 255, 255)
+name.TextScaled = true
+name.TextSize = 14.000
+name.TextWrapped = true
+
+note.Name = "note"
+note.Parent = mainframe
+note.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+note.BorderColor3 = Color3.fromRGB(255, 75, 75)
+note.Position = UDim2.new(0, 50, 1, -60)
+note.Size = UDim2.new(0, 115, 0, 50)
+
+text.Name = "text"
+text.Parent = note
+text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+text.BackgroundTransparency = 1.000
+text.Size = UDim2.new(1, 0, 1, 0)
+text.Font = Enum.Font.Fantasy
+text.Text = "Please do not abuse pull!"
+text.TextColor3 = Color3.fromRGB(255, 255, 255)
+text.TextScaled = true
+text.TextSize = 14.000
+text.TextWrapped = true
